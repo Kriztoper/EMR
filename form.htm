@@ -1,73 +1,177 @@
-<form id="myForm">
-  Name:
-  <input type="text" name="first_name" id="first_name" data-ga-label="first_name" />
-  <input type="text" name="last_name" id="last_name" data-ga-label="last_name" />
-  <input type="text" name="middle_name" id="middle_name" data-ga-label="middle_name" /><br/>
-  Address:
-  <input type="text" name="street" id="street" data-ga-label="street" />
-  <input type="text" name="brgy" id="brgy" data-ga-label="brgy" />
-  <input type="text" name="city" id="city" data-ga-label="city" />
-  <input type="text" name="province" id="province" data-ga-label="province" />
-  <input type="text" name="zip" id="zip" data-ga-label="zip" /><br/>
-  Sex:
-  <input type="radio" name="gender" value="male" checked> Male
-  <input type="radio" name="gender" value="female"> Female<br>
-  Contact Details:
-  <input type="text" name="cell" id="cell" data-ga-label="cell" />
-  <input type="text" name="tel" id="tel" data-ga-label="tel" />
-  <input type="text" name="email" id="email" data-ga-label="email" /><br>
-  Date of Birth:
-  <input type="date" name="" id="" data-ga-label="" /><br>
-  Civil/Marital Status:
-  <input type="radio" name="status" value="single" checked> Single
-  <input type="radio" name="status" value="married" > Married
-  <input type="radio" name="status" value="widowed" > Widowed 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
   <br>
-  Emergency Contact Details
-  Name:
-  <input type="text" name="e_first_name" id="e_first_name" data-ga-label="e_first_name" />
-  <input type="text" name="e_last_name" id="e_last_name" data-ga-label="e_last_name" />
-  <input type="text" name="e_middle_name" id="e_middle_name" data-ga-label="e_middle_name" /><br/>
-  Relationship: 
-  <input type="text" name="e_relationship" id="e_relationship" data-ga-label="e_relationship" />
-  <input type="text" name="e_cell" id="e_cell" data-ga-label="e_cell" />
-  <input type="text" name="e_tel" id="e_tel" data-ga-label="e_tel" />
-  <input type="text" name="e_email" id="e_email" data-ga-label="e_email" /><br>
-  Medical Information <br>
-  Medical History / Special Conditions
-  <textarea rows="4" cols="50" placeholder="e.g. asthma, heart failure"></textarea><br>
-  Bloodtype
-  <select name="blood_type">
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="AB">AB</option>
-    <option value="O">O</option>
-  </select>
-  <br>
-  Birthmarks/Scars 
-  <textarea name="birthmark_scars" rows="5" cols="30"  placeholder="e.g. mole below right eye, scar on left head"></textarea><br>
-  <button type="submit">Submit</button>
-</form>
+  <div class="container">
+      <form>
+          <h3>Name</h3>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="text" class="form-control" name="first_name" id="first_name" data-ga-label="first_name" />
+                  <label for="">First Name</label>
+                </div>     
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="middle_name" id="middle_name" data-ga-label="middle_name" />
+                  <label for="">Middle Name</label>
+              </div>
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="last_name" id="last_name" data-ga-label="last_name" />  
+                  <label for="">Last Name</label>
+                </div>
+          </div>
 
-<script type="text/javascript">
-  var _gaq = [];
-  $(function() {
+          <h3>Address</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input class="form-control" type="text" name="street" id="street" data-ga-label="street" />
+              <label for="">Street</label>
+            </div>
+            <div class="form-group col-md-3">
+              <input class="form-control" type="text" name="brgy" id="brgy" data-ga-label="brgy" />
+              <label for="">Brgy.</label>
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="city" id="city" data-ga-label="city" />
+                  <label for="">City</label>
+                </div>     
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="province" id="province" data-ga-label="province" />
+                  <label for="">Province</label>
+              </div>
+              <div class="form-group col-md-2">
+                  <input class="form-control" type="text" name="zip" id="zip" data-ga-label="zip" /><br/>
+                  <label for="">Zip</label>
+                </div>
+          </div>
+          <h3>Sex</h3>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" value="male" checked> Male
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" value="female"> Female
+          </div>
+          <br>
+          <h3>Contact details</h3>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="cell" id="cell" data-ga-label="cell" />
+                  <label for="">Cell No.</label>
+                </div>     
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="text" name="tel" id="tel" data-ga-label="tel" />
+                  <label for="">Tel. No.</label>
+              </div>
+              <div class="form-group col-md-4">
+                  <input class="form-control" type="email" name="email" id="email" data-ga-label="email" /><br>
+                  <label for="">Email</label>
+                </div>
+          </div>
+        <h3>Date of Birth:</h3>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <input class="form-control" type="date" name="" id="" data-ga-label="" /><br>
+                
+              </div>     
+        </div>
+          
+              
+          
+      </form>
 
-    $('input[data-ga-label]').each( function () {
+      <br><br><br><br><br><br><br>  
 
-      // Binds the anonymous function to both click and blur
-      // to capture clicking and tabbing into the text box.
-      $(this).bind('click blur', function (e) {
-
-        var
-          formId  = $(this).closest('form').attr('id');
-          id      = $(this).attr('id'),       // ID of the textbox
-          value   = $(this).val();            // Value inside the text box
-
-        // Push a tracking event to Google Analytics
-        _gaq.push([ '_trackEvent', 'Forms:' + formId, 'Interacted with', id ]);
+    <form id="myForm">
+        <div class="form-row">
+        Name:
+        <div class="form-group col-md-4">
+          <input class="form-control" type="text" name="first_name" id="first_name" data-ga-label="first_name" />
+        </div>
+        <div class="form-group col-md-4">
+          <input class="form-control" type="text" name="last_name" id="last_name" data-ga-label="last_name" />  
+        </div>
+        <div class="form-group col-md-4">
+          <input class="form-control" type="text" name="middle_name" id="middle_name" data-ga-label="middle_name" />
+        </div>
+        
+        
+        <br/>
+        </div>
+      Address:
+      
+      Sex:
+      
+      Contact Details:
+      
+      Date of Birth:
+      
+      Civil/Marital Status:
+      <input class="form-control" type="radio" name="status" value="single" checked> Single
+      <input class="form-control" type="radio" name="status" value="married" > Married
+      <input class="form-control" type="radio" name="status" value="widowed" > Widowed 
+      <br>
+      Emergency Contact Details
+      Name:
+      <input class="form-control" type="text" name="e_first_name" id="e_first_name" data-ga-label="e_first_name" />
+      <input class="form-control" type="text" name="e_last_name" id="e_last_name" data-ga-label="e_last_name" />
+      <input class="form-control" type="text" name="e_middle_name" id="e_middle_name" data-ga-label="e_middle_name" /><br/>
+      Relationship: 
+      <input class="form-control" type="text" name="e_relationship" id="e_relationship" data-ga-label="e_relationship" />
+      <input class="form-control" type="text" name="e_cell" id="e_cell" data-ga-label="e_cell" />
+      <input class="form-control" type="text" name="e_tel" id="e_tel" data-ga-label="e_tel" />
+      <input class="form-control" type="text" name="e_email" id="e_email" data-ga-label="e_email" /><br>
+      Medical Information <br>
+      Medical History / Special Conditions
+      <textarea rows="4" cols="50" placeholder="e.g. asthma, heart failure"></textarea><br>
+      Bloodtype
+      <select name="blood_type">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="AB">AB</option>
+        <option value="O">O</option>
+      </select>
+      <br>
+      Birthmarks/Scars 
+      <textarea name="birthmark_scars" rows="5" cols="30"  placeholder="e.g. mole below right eye, scar on left head"></textarea><br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var _gaq = [];
+    $(function() {
+  
+      $('input[data-ga-label]').each( function () {
+  
+        // Binds the anonymous function to both click and blur
+        // to capture clicking and tabbing into the text box.
+        $(this).bind('click blur', function (e) {
+  
+          var
+            formId  = $(this).closest('form').attr('id');
+            id      = $(this).attr('id'),       // ID of the textbox
+            value   = $(this).val();            // Value inside the text box
+  
+          // Push a tracking event to Google Analytics
+          _gaq.push([ '_trackEvent', 'Forms:' + formId, 'Interacted with', id ]);
+        });
       });
+  
     });
+  </script>
+</body>
+</html>
 
-  });
-</script>
