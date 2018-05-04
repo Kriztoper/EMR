@@ -1,0 +1,308 @@
+<html>
+  <head>
+    <title>EMR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    <br>
+    <div class="container">
+      <form id="myForm">
+        <h3>Name</h3>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input type="text" class="form-control" name="first_name" id="emr_first_name" data-ga-label="first_name" />
+            <label for="">First Name</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="middle_name" id="emr_middle_name" data-ga-label="middle_name" />
+            <label for="">Middle Name</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="last_name" id="emr_last_name" data-ga-label="last_name" />
+            <label for="">Last Name</label>
+          </div>
+        </div>
+  
+        <h3>Address</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input class="form-control" type="text" name="street" id="emr_street" data-ga-label="street" />
+            <label for="">Street</label>
+          </div>
+          <div class="form-group col-md-3">
+            <input class="form-control" type="text" name="brgy" id="emr_brgy" data-ga-label="brgy" />
+            <label for="">Brgy.</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="city" id="emr_city" data-ga-label="city" />
+            <label for="">City</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="province" id="emr_province" data-ga-label="province" />
+            <label for="">Province</label>
+          </div>
+          <div class="form-group col-md-2">
+            <input class="form-control" type="text" name="zip" id="emr_zip" data-ga-label="zip" />
+            <br/>
+            <label for="">Zip</label>
+          </div>
+        </div>
+        <h3>Sex</h3>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="male" checked> Male
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="female"> Female
+        </div>
+        <br>
+        <h3>Contact details</h3>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="cell" id="emr_cell" data-ga-label="cell" />
+            <label for="">Cell No.</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="tel" id="emr_tel" data-ga-label="tel" />
+            <label for="">Tel. No.</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="email" name="email" id="emr_email" data-ga-label="email" />
+            <br>
+            <label for="">Email</label>
+          </div>
+        </div>
+        <h3>Date of Birth</h3>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input class="form-control" type="date" name="" id="emr_date_of_birth" data-ga-label="" />
+            <br>
+          </div>
+        </div>
+        <h3>Marital Status</h3>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="m_status" value="single" checked> Single
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="m_status" value="married"> Married
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="m_status" value="widowed"> Widowed
+        </div>
+        <br>
+        <h3>Emergency Contact Details</h3>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input type="text" class="form-control" name="e_first_name" id="emr_e_first_name" data-ga-label="e_first_name" />
+            <label for="">First Name</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="e_middle_name" id="emr_e_middle_name" data-ga-label="e_middle_name" />
+            <label for="">Middle Name</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="e_last_name" id="emr_e_last_name" data-ga-label="e_last_name" />
+            <label for="">Last Name</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="relationship" id="emr_relationship" data-ga-label="relationship" /> Relationship
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="cell" id="emr_cell" data-ga-label="cell" />
+            <label for="">Cell No.</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="text" name="tel" id="emr_tel" data-ga-label="tel" />
+            <label for="">Tel. No.</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input class="form-control" type="email" name="email" id="emr_email" data-ga-label="email" />
+            <br>
+            <label for="">Email</label>
+          </div>
+        </div>
+        <h3>Medical Information</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <textarea class="form-control" id="emr_medical_information" rows="4" cols="80" placeholder="e.g. asthma, heart failure"></textarea>
+            <label for="">Medical History/Special Conditions</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <select class="form-control" id="emr_blood_type">
+              <option>A</option>
+              <option>B</option>
+              <option>AB</option>
+              <option>O</option>
+            </select>
+            <label for="">Blood type</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <textarea class="form-control" id="emr_birthmarks" rows="4" cols="80" placeholder="e.g. mole below right eye, scar on left hand"></textarea>
+            <label for="">Birthmarks</label>
+          </div>
+        </div>
+  
+  
+  
+      </form>
+    </div>
+    <button id="submit-form">Submit</button>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      fields = [];
+      time_spent = "00:00:00.0";
+      curr_id = null;
+      curr_val = null;
+
+      class Field {
+        constructor(id, value="", time="00:00:00.0") {
+          this.id = id;
+          this.value = value;
+          this.time = time;
+        }
+      }
+
+      // Function to download data to a file
+      function download(data, filename, type) {
+          var file = new Blob([data], {type: type});
+          if (window.navigator.msSaveOrOpenBlob) // IE10+
+              window.navigator.msSaveOrOpenBlob(file, filename);
+          else { // Others
+              var a = document.createElement("a"),
+                      url = URL.createObjectURL(file);
+              a.href = url;
+              a.download = filename;
+              document.body.appendChild(a);
+              a.click();
+              setTimeout(function() {
+                  document.body.removeChild(a);
+                  window.URL.revokeObjectURL(url);  
+              }, 0); 
+          }
+      }
+
+      window.onload = function() {
+        initTime = new Date().getTime();
+
+        // init all fields
+        components = [].slice.call($('*[id^="emr_"]'));
+        for (i = 0; i < components.length; i++) {
+          fields[i] = new Field(components[i].id);
+        }
+
+        // var pt = window.location.search.split('=')[1],
+        var e = document.body.childNodes;
+        var t = e[0];
+        var s = 0;//(pt*1||0),
+        var interval;
+        var ms2Time = function(a) {
+          var ms = parseInt((a%1000)/100);
+          var s = parseInt((a/1000)%60);
+          var m = parseInt((a/(1000*60))%60);
+          var h = parseInt((a/(1000*60*60))%24);
+          
+          return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
+        };
+        var startTimer = function() {
+          s = new Date().getTime();
+          interval = window.setInterval(getcurrent,100);
+        };
+        var stopTimer = function() {
+          window.clearInterval(interval);
+          s = 0;
+        };
+        var getcurrent = function() {
+          t.textContent = ms2Time(new Date().getTime()-s);
+        };
+        var changepage = function() {
+          window.location = '?start='+s;
+        };
+        
+        e[1].addEventListener('click', startTimer);
+      }
+    </script>
+
+    
+    <script type="text/javascript">
+      $(function() {
+        $('#submit-form').on('click', function() {
+          var record = [];
+          for (i = 0; i < fields.length; i++) {
+              record[i] = fields[i].id + "-" + fields[i].value + "-" + fields[i].time;
+          }
+          download(record, "emr.txt", {type: "text/plain;charset=utf-8"});
+        });
+
+        $('input[data-ga-label]').each( function () {
+    
+          // Binds the anonymous function to both click and blur
+          // to capture clicking and tabbing into the text box.
+          $(this).bind('click blur', function (e) {
+    
+
+            //???
+            var ms2Time = function(a) {
+              var ms = parseInt((a%1000)/100);
+              var s = parseInt((a/1000)%60);
+              var m = parseInt((a/(1000*60))%60);
+              var h = parseInt((a/(1000*60*60))%24);
+              
+              return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
+            };
+            var startTimer = function() {
+              s = new Date().getTime();
+              interval = window.setInterval(getcurrent,100);
+            };
+            //???
+            curr_id = this.id;
+            curr_val = this.value;
+            time_spent = ms2Time(new Date().getTime()-initTime);
+            if (time_spent != "00:00:00.0") {
+              field = fields.filter(function(field) {
+                return field.id == curr_id;
+              });
+              field[0].time = time_spent;
+              field[0].value = curr_val;
+            }
+            //>>>>>>>>>>>
+
+
+
+            var formId  = $(this).closest('form').attr('id');
+            var id      = $(this).attr('id');       // ID of the textbox
+            var value   = $(this).val();            // Value inside the text box
+    
+            console.log("form = '" + formId + "', id = '" + curr_id + "', value = '" + curr_val + "'"//);
+            + ", time = " + time_spent);
+            
+            // + ", time = " + ms2Time(new Date().getTime()-s));
+            // Push a tracking event to Google Analytics
+            // _gaq.push([ '_trackEvent', 'Forms:' + formId, 'Interacted with', id ]);
+          });
+        });
+      });
+    </script>  
+  </body>
+</html>
