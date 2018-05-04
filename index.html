@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>EMR</title>
+  </head>
+
+  <body>
+    <form id="myForm">
+      Name:
+      <input type="text" name="first_name" id="first_name" data-ga-label="first_name" />
+      <input type="text" name="last_name" id="last_name" data-ga-label="last_name" />
+      <input type="text" name="middle_name" id="middle_name" data-ga-label="middle_name" /><br/>
+      Address:
+      <input type="text" name="street" id="street" data-ga-label="street" />
+      <input type="text" name="brgy" id="brgy" data-ga-label="brgy" />
+      <input type="text" name="city" id="city" data-ga-label="city" />
+      <input type="text" name="province" id="province" data-ga-label="province" />
+      <input type="text" name="zip" id="zip" data-ga-label="zip" /><br/>
+      Sex:
+      <input type="radio" name="gender" value="male" checked> Male
+      <input type="radio" name="gender" value="female"> Female<br>
+      Contact Details:
+      <input type="text" name="cell" id="cell" data-ga-label="cell" />
+      <input type="text" name="tel" id="tel" data-ga-label="tel" />
+      <input type="text" name="email" id="email" data-ga-label="email" /><br>
+      Date of Birth:
+      <input type="date" name="" id="date_of_birth" data-ga-label="" /><br>
+      Civil/Marital Status:
+      <input type="radio" name="status" value="single" checked> Single
+      <input type="radio" name="status" value="married" > Married
+      <input type="radio" name="status" value="widowed" > Widowed 
+      <br>
+      Emergency Contact Details
+      Name:
+      <input type="text" name="e_first_name" id="e_first_name" data-ga-label="e_first_name" />
+      <input type="text" name="e_last_name" id="e_last_name" data-ga-label="e_last_name" />
+      <input type="text" name="e_middle_name" id="e_middle_name" data-ga-label="e_middle_name" /><br/>
+      Relationship: 
+      <input type="text" name="e_relationship" id="e_relationship" data-ga-label="e_relationship" />
+      <input type="text" name="e_cell" id="e_cell" data-ga-label="e_cell" />
+      <input type="text" name="e_tel" id="e_tel" data-ga-label="e_tel" />
+      <input type="text" name="e_email" id="e_email" data-ga-label="e_email" /><br>
+      Medical Information <br>
+      Medical History / Special Conditions
+      <textarea rows="4" cols="50" id="medical_history" placeholder="e.g. asthma, heart failure"></textarea><br>
+      Bloodtype
+      <select name="blood_type" id="blood_type">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="AB">AB</option>
+        <option value="O">O</option>
+      </select>
+      <br>
+      Birthmarks/Scars 
+      <textarea name="birthmark_scars" rows="5" cols="30" id="birthmark_scars"  placeholder="e.g. mole below right eye, scar on left head"></textarea><br>
+    </form>
+    <button id="submit-form">Submit</button>
+    
+    <div id="timer"></div><button>start</button><button>stop</button><button>anotherpage</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      fields = [];
+      time_spent = "00:00:00.0";
+      curr_id = null;
+      curr_val = null;
+
+      class Field {
+        constructor(id, value="", time="00:00:00.0") {
+          this.id = id;
+          this.value = value;
+          this.time = time;
+        }
+      }
+
+      // Function to download data to a file
+      function download(data, filename, type) {
+          var file = new Blob([data], {type: type});
+          if (window.navigator.msSaveOrOpenBlob) // IE10+
+              window.navigator.msSaveOrOpenBlob(file, filename);
+          else { // Others
+              var a = document.createElement("a"),
+                      url = URL.createObjectURL(file);
+              a.href = url;
+              a.download = filename;
+              document.body.appendChild(a);
+              a.click();
+              setTimeout(function() {
+                  document.body.removeChild(a);
+                  window.URL.revokeObjectURL(url);  
+              }, 0); 
+          }
+      }
+
+      window.onload = function() {
+        initTime = new Date().getTime();
+
+        // init all fields
+        components = [].slice.call(myForm.childNodes);
+        for (i = 0; i < components.length; i++) {
+          fields[i] = new Field(components[i].id);
+        }
+
+        // var pt = window.location.search.split('=')[1],
+        var e = document.body.childNodes;
+        var t = e[0];
+        var s = 0;//(pt*1||0),
+        var interval;
+        var ms2Time = function(a) {
+          var ms = parseInt((a%1000)/100);
+          var s = parseInt((a/1000)%60);
+          var m = parseInt((a/(1000*60))%60);
+          var h = parseInt((a/(1000*60*60))%24);
+          
+          return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
+        };
+        var startTimer = function() {
+          s = new Date().getTime();
+          interval = window.setInterval(getcurrent,100);
+        };
+        var stopTimer = function() {
+          window.clearInterval(interval);
+          s = 0;
+        };
+        var getcurrent = function() {
+          t.textContent = ms2Time(new Date().getTime()-s);
+        };
+        var changepage = function() {
+          window.location = '?start='+s;
+        };
+        
+        e[1].addEventListener('click', startTimer);
+      }
+    </script>
+
+    
+    <script type="text/javascript">
+      $(function() {
+        $('#submit-form').on('click', function() {
+          var record = [];
+          for (i = 0; i < fields.length; i++) {
+            if (fields[i].id != undefined) {
+              record[i] = fields[i].id + "-" + fields[i].value + "-" + fields[i].time;
+            }
+          }
+          download(record, "emr.txt", {type: "text/plain;charset=utf-8"});
+        });
+
+        $('input[data-ga-label]').each( function () {
+    
+          // Binds the anonymous function to both click and blur
+          // to capture clicking and tabbing into the text box.
+          $(this).bind('click blur', function (e) {
+    
+
+            //???
+            var ms2Time = function(a) {
+              var ms = parseInt((a%1000)/100);
+              var s = parseInt((a/1000)%60);
+              var m = parseInt((a/(1000*60))%60);
+              var h = parseInt((a/(1000*60*60))%24);
+              
+              return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
+            };
+            var startTimer = function() {
+              s = new Date().getTime();
+              interval = window.setInterval(getcurrent,100);
+            };
+            //???
+            curr_id = this.id;
+            curr_val = this.value;
+            time_spent = ms2Time(new Date().getTime()-initTime);
+            if (time_spent != "00:00:00.0") {
+              field = fields.filter(function(field) {
+                return field.id == curr_id;
+              });
+              field[0].time = time_spent;
+              field[0].value = curr_val;
+            }
+            //>>>>>>>>>>>
+
+
+
+            var formId  = $(this).closest('form').attr('id');
+            var id      = $(this).attr('id');       // ID of the textbox
+            var value   = $(this).val();            // Value inside the text box
+    
+            console.log("form = '" + formId + "', id = '" + curr_id + "', value = '" + curr_val + "'"//);
+            + ", time = " + time_spent);
+            
+            // + ", time = " + ms2Time(new Date().getTime()-s));
+            // Push a tracking event to Google Analytics
+            // _gaq.push([ '_trackEvent', 'Forms:' + formId, 'Interacted with', id ]);
+          });
+        });
+      });
+    </script>  
+  </body>
+</html>
