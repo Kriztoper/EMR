@@ -232,33 +232,6 @@
             }
           }
         }
-
-        // var pt = window.location.search.split('=')[1];
-        // var e = document.body.childNodes;
-        // var t = e[0];
-        // var s = (pt*1||0);
-        // var interval;
-        // var ms2Time2 = function(a) {
-        //   var ms = parseInt((a%1000)/100);
-        //   var s = parseInt((a/1000)%60);
-        //   var m = parseInt((a/(1000*60))%60);
-        //   var h = parseInt((a/(1000*60*60))%24);
-          
-        //   return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
-        // };
-        // var startTimer2 = function() {
-        //   s = new Date().getTime();
-        //   interval = window.setInterval(getcurrent2,100);
-        // };
-        // var getcurrent2 = function() {
-        //   t.textContent = ms2Time2(new Date().getTime()-s);
-        // };
-        
-        // e[1].addEventListener('click', startTimer2);
-
-        // if (pt && pt != 0) {
-        //   interval=window.setInterval(getcurrent2, 100);
-        // }
       }
     </script>
     <script type="text/javascript">
@@ -277,8 +250,6 @@
           // to capture clicking and tabbing into the text box.
           $(this).bind('click blur', function (e) {
     
-
-            //???
             var ms2Time = function(a) {
               var ms = parseInt((a%1000)/100);
               var s = parseInt((a/1000)%60);
@@ -287,31 +258,6 @@
               
               return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
             };
-
-            // var startTimer = function() {
-            //   s = new Date().getTime();
-            //   interval = window.setInterval(getcurrent,100);
-            // };
-            // var getcurrent = function() {
-            //   t.textContent = ms2Time(new Date().getTime()-s);
-            // };
-            // var convertTimeStringToInt = function(time) {
-
-            // }
-            //???
-
-            // set time_spent of prev selected field as current_time - time_spent
-            if (curr_id != null) {
-              field = fields.find(function(field) {
-                return field.id == curr_id;
-              });
-
-            //   // if (time_spent == "00:00:00.0") {
-            //   //   time_spent = ms2Time(time_spent);
-            //   // }
-            //   // field.time = ms2Time(new Date().getTime()-time_spent);
-              console.log("prev component = " + field.id + ", time spent = " + prev_field.time);
-            }
 
             curr_id = this.id;
             curr_val = this.value;
@@ -332,13 +278,7 @@
                 }
               }
             }
-            // if (is_init_time) {
-              time_spent = new Date().getTime()-initTime;
-              // prev_time_spent = time_spent;
-              // is_init_time = false;
-            // } else {
-            //   time_spent = time_spent - prev_time_spent;
-            // }
+            time_spent = new Date().getTime()-initTime;
             if (time_spent != "00:00:00.0") {
               field = fields.find(function(field) {
                 return field.id == curr_id;
@@ -350,10 +290,7 @@
               field.value = curr_val;
               prev_field = field;
             }
-            //>>>>>>>>>>>
-
-
-
+            
             var formId  = $(this).closest('form').attr('id');
             // var id      = $(this).attr('id');       // ID of the textbox
             // var value   = $(this).val();            // Value inside the text box
