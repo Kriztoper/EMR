@@ -56,11 +56,13 @@
           </div>
         </div>
         <h3>Sex</h3>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" value="male" checked> Male
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" value="female"> Female
+        <div id="emr_sex" data-ga-label="emr_sex">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" value="male"> Male
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" value="female"> Female
+          </div>
         </div>
         <br>
         <h3>Contact details</h3>
@@ -82,19 +84,21 @@
         <h3>Date of Birth</h3>
         <div class="form-row">
           <div class="form-group col-md-4">
-            <input class="form-control" type="date" name="" id="emr_date_of_birth" data-ga-label="" />
+            <input class="form-control" type="date" name="emr_date_of_birth" id="emr_date_of_birth" data-ga-label="emr_date_of_birth" />
             <br>
           </div>
         </div>
         <h3>Marital Status</h3>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="m_status" value="single" checked> Single
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="m_status" value="married"> Married
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="m_status" value="widowed"> Widowed
+        <div id="emr_marital_status" data-ga-label="emr_marital_status">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="m_status" value="single"> Single
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="m_status" value="married"> Married
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="m_status" value="widowed"> Widowed
+          </div>
         </div>
         <br>
         <h3>Emergency Contact Details</h3>
@@ -119,15 +123,15 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-4">
-            <input class="form-control" type="text" name="cell" id="emr_cell" data-ga-label="cell" />
+            <input class="form-control" type="text" name="cell" id="emr_e_cell" data-ga-label="cell" />
             <label for="">Cell No.</label>
           </div>
           <div class="form-group col-md-4">
-            <input class="form-control" type="text" name="tel" id="emr_tel" data-ga-label="tel" />
+            <input class="form-control" type="text" name="tel" id="emr_e_tel" data-ga-label="tel" />
             <label for="">Tel. No.</label>
           </div>
           <div class="form-group col-md-4">
-            <input class="form-control" type="email" name="email" id="emr_email" data-ga-label="email" />
+            <input class="form-control" type="email" name="email" id="emr_e_email" data-ga-label="email" />
             <br>
             <label for="">Email</label>
           </div>
@@ -135,13 +139,13 @@
         <h3>Medical Information</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <textarea class="form-control" id="emr_medical_information" rows="4" cols="80" placeholder="e.g. asthma, heart failure"></textarea>
+            <textarea class="form-control" id="emr_medical_information" data-ga-label="emr_medical_information" rows="4" cols="80" placeholder="e.g. asthma, heart failure"></textarea>
             <label for="">Medical History/Special Conditions</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-4">
-            <select class="form-control" id="emr_blood_type">
+            <select class="form-control" id="emr_blood_type" data-ga-label="emr_blood_type">
               <option>A</option>
               <option>B</option>
               <option>AB</option>
@@ -152,13 +156,10 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <textarea class="form-control" id="emr_birthmarks" rows="4" cols="80" placeholder="e.g. mole below right eye, scar on left hand"></textarea>
+            <textarea class="form-control" class="emr" id="emr_birthmarks" data-ga-label="emr_birthmarks" rows="4" cols="80" placeholder="e.g. mole below right eye, scar on left hand"></textarea>
             <label for="">Birthmarks</label>
           </div>
         </div>
-  
-  
-  
       </form>
     </div>
     <button id="submit-form">Submit</button>
@@ -173,8 +174,12 @@
     <script>
       fields = [];
       time_spent = "00:00:00.0";
+      prev_time_spent = "00:00:00.0";
       curr_id = null;
       curr_val = null;
+      field = null;
+      prev_field = null;
+      is_init_time = true;
 
       class Field {
         constructor(id, value="", time="00:00:00.0") {
@@ -191,7 +196,7 @@
               window.navigator.msSaveOrOpenBlob(file, filename);
           else { // Others
               var a = document.createElement("a"),
-                      url = URL.createObjectURL(file);
+              url = URL.createObjectURL(file);
               a.href = url;
               a.download = filename;
               document.body.appendChild(a);
@@ -205,57 +210,68 @@
 
       window.onload = function() {
         initTime = new Date().getTime();
+        is_init_time = true;
 
         // init all fields
         components = [].slice.call($('*[id^="emr_"]'));
         for (i = 0; i < components.length; i++) {
           fields[i] = new Field(components[i].id);
+          if (fields[i].id == 'emr_sex') {
+            var sexes = document.getElementsByName('gender');
+            for (j = 0; j < sexes.length; j++) {
+              if (sexes[j].checked) {
+                fields[i].value = sexes[j].value;
+              }
+            }
+          } else if (fields[i].id == 'emr_marital_status') {
+            var statuses = document.getElementsByName('m_status');
+            for (j = 0; j < statuses.length; j++) {
+              if (statuses[j].checked) {
+                fields[i].value = statuses[j].value;
+              }
+            }
+          }
         }
 
-        // var pt = window.location.search.split('=')[1],
-        var e = document.body.childNodes;
-        var t = e[0];
-        var s = 0;//(pt*1||0),
-        var interval;
-        var ms2Time = function(a) {
-          var ms = parseInt((a%1000)/100);
-          var s = parseInt((a/1000)%60);
-          var m = parseInt((a/(1000*60))%60);
-          var h = parseInt((a/(1000*60*60))%24);
+        // var pt = window.location.search.split('=')[1];
+        // var e = document.body.childNodes;
+        // var t = e[0];
+        // var s = (pt*1||0);
+        // var interval;
+        // var ms2Time2 = function(a) {
+        //   var ms = parseInt((a%1000)/100);
+        //   var s = parseInt((a/1000)%60);
+        //   var m = parseInt((a/(1000*60))%60);
+        //   var h = parseInt((a/(1000*60*60))%24);
           
-          return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
-        };
-        var startTimer = function() {
-          s = new Date().getTime();
-          interval = window.setInterval(getcurrent,100);
-        };
-        var stopTimer = function() {
-          window.clearInterval(interval);
-          s = 0;
-        };
-        var getcurrent = function() {
-          t.textContent = ms2Time(new Date().getTime()-s);
-        };
-        var changepage = function() {
-          window.location = '?start='+s;
-        };
+        //   return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
+        // };
+        // var startTimer2 = function() {
+        //   s = new Date().getTime();
+        //   interval = window.setInterval(getcurrent2,100);
+        // };
+        // var getcurrent2 = function() {
+        //   t.textContent = ms2Time2(new Date().getTime()-s);
+        // };
         
-        e[1].addEventListener('click', startTimer);
+        // e[1].addEventListener('click', startTimer2);
+
+        // if (pt && pt != 0) {
+        //   interval=window.setInterval(getcurrent2, 100);
+        // }
       }
     </script>
-
-    
     <script type="text/javascript">
       $(function() {
         $('#submit-form').on('click', function() {
           var record = [];
           for (i = 0; i < fields.length; i++) {
-              record[i] = fields[i].id + "-" + fields[i].value + "-" + fields[i].time;
+              record[i] = fields[i].id + ", " + fields[i].value + ", " + fields[i].time + "\n";
           }
           download(record, "emr.txt", {type: "text/plain;charset=utf-8"});
         });
 
-        $('input[data-ga-label]').each( function () {
+        $('*[id^="emr_"]').each( function () {
     
           // Binds the anonymous function to both click and blur
           // to capture clicking and tabbing into the text box.
@@ -271,32 +287,81 @@
               
               return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s)+'.'+ms;
             };
-            var startTimer = function() {
-              s = new Date().getTime();
-              interval = window.setInterval(getcurrent,100);
-            };
+
+            // var startTimer = function() {
+            //   s = new Date().getTime();
+            //   interval = window.setInterval(getcurrent,100);
+            // };
+            // var getcurrent = function() {
+            //   t.textContent = ms2Time(new Date().getTime()-s);
+            // };
+            // var convertTimeStringToInt = function(time) {
+
+            // }
             //???
-            curr_id = this.id;
-            curr_val = this.value;
-            time_spent = ms2Time(new Date().getTime()-initTime);
-            if (time_spent != "00:00:00.0") {
-              field = fields.filter(function(field) {
+
+            // set time_spent of prev selected field as current_time - time_spent
+            if (curr_id != null) {
+              field = fields.find(function(field) {
                 return field.id == curr_id;
               });
-              field[0].time = time_spent;
-              field[0].value = curr_val;
+
+            //   // if (time_spent == "00:00:00.0") {
+            //   //   time_spent = ms2Time(time_spent);
+            //   // }
+            //   // field.time = ms2Time(new Date().getTime()-time_spent);
+              console.log("prev component = " + field.id + ", time spent = " + prev_field.time);
+            }
+
+            curr_id = this.id;
+            curr_val = this.value;
+            if (curr_id == 'emr_sex') {
+              var sexes = document.getElementsByName('gender');
+              for (i = 0; i < sexes.length; i++) {
+                if (sexes[i].checked) {
+                  curr_val = sexes[i].value;
+                  curr_id = 'emr_sex';
+                }
+              }
+            } else if (curr_id == 'emr_marital_status') {
+              var statuses = document.getElementsByName('m_status');
+              for (i = 0; i < statuses.length; i++) {
+                if (statuses[i].checked) {
+                  curr_val = statuses[i].value;
+                  curr_id = 'emr_marital_status';
+                }
+              }
+            }
+            // if (is_init_time) {
+              time_spent = new Date().getTime()-initTime;
+              // prev_time_spent = time_spent;
+              // is_init_time = false;
+            // } else {
+            //   time_spent = time_spent - prev_time_spent;
+            // }
+            if (time_spent != "00:00:00.0") {
+              field = fields.find(function(field) {
+                return field.id == curr_id;
+              });
+              field.time = ms2Time(time_spent);
+              if (prev_field != null) {
+                prev_field.time = field.time;
+              }
+              field.value = curr_val;
+              prev_field = field;
             }
             //>>>>>>>>>>>
 
 
 
             var formId  = $(this).closest('form').attr('id');
-            var id      = $(this).attr('id');       // ID of the textbox
-            var value   = $(this).val();            // Value inside the text box
+            // var id      = $(this).attr('id');       // ID of the textbox
+            // var value   = $(this).val();            // Value inside the text box
     
-            console.log("form = '" + formId + "', id = '" + curr_id + "', value = '" + curr_val + "'"//);
-            + ", time = " + time_spent);
+            console.log("form = '" + formId + "', id = '" + field.id + "', value = '" + field.value + "'"//);
+            + ", time = " + field.time);
             
+            initTime = new Date().getTime();
             // + ", time = " + ms2Time(new Date().getTime()-s));
             // Push a tracking event to Google Analytics
             // _gaq.push([ '_trackEvent', 'Forms:' + formId, 'Interacted with', id ]);
